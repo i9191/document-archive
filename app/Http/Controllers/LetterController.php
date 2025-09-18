@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Letter;
 use App\Http\Requests\StoreLetterRequest;
 use App\Http\Requests\UpdateLetterRequest;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class LetterController extends Controller
@@ -12,10 +13,17 @@ class LetterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         return Inertia::render('Letter/Index', [
-            'letters' => Letter::with('letterCategory')->get()
+            'letters' => Letter::with('letterCategory')
+                ->when($request->search, function ($query, $search) {
+                    $query->where('title', 'like', "%{$search}%");
+                })
+                ->orderByDesc('created_at')
+                ->take(20)
+                ->get(),
+            'filters' => $request->only(['search'])
         ]);
     }
 

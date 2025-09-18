@@ -1,11 +1,11 @@
 <script setup>
-import { reactive } from "vue";
+import { toRefs } from "vue";
 import { Link, useForm } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 
 const props = defineProps({
     letters: Array,
-    // filters: Object,
+    filters: Object,
 });
 
 const form = useForm({
@@ -19,16 +19,15 @@ const searchLetters = () => {
     });
 };
 
-const { letters } = props;
-console.log(letters);
+const { letters } = toRefs(props);
 </script>
 <template>
     <AppLayout title="Arsip Surat">
     <div class="p-6">
         <h1 class="text-2xl font-bold mb-4">Arsip Surat</h1>
         <p class="mb-4 text-gray-600">
-            Berikut ini adalah surat-surat yang telah terbit dan diarsipkan. Klik
-            <b>"Lihat"</b> pada kolom aksi untuk menampilkan surat.
+            Berikut ini adalah surat-surat yang telah terbit dan diarsipkan. 
+            Klik <b>"Lihat"</b> pada kolom aksi untuk menampilkan surat.
         </p>
 
         <!-- Search -->

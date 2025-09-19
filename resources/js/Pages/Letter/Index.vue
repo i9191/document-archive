@@ -23,10 +23,26 @@ const { letters } = toRefs(props);
 </script>
 <template>
     <AppLayout title="Arsip Surat">
+    <!-- Flash Success -->
+    <div v-if="$page.props.flash?.success" class="mb-4 p-3 rounded bg-green-100 text-green-700 flex justify-between">
+        {{ $page.props.flash.success }}
+        <button @click="$page.props.flash.success = null" class="text-gray-500 hover:text-gray-800 ml-auto">
+            x
+        </button>
+    </div>
+
+    <!-- Flash Error -->
+    <div v-if="$page.props.flash?.error" class="mb-4 p-3 rounded bg-red-100 text-red-700 flex justify-between">
+        {{ $page.props.flash.error }}
+        <button @click="$page.props.flash.error = null" class="text-gray-500 hover:text-gray-800 ml-auto">
+            x
+        </button>
+    </div>
+
     <div class="p-6">
         <h1 class="text-2xl font-bold mb-4">Arsip Surat</h1>
         <p class="mb-4 text-gray-600">
-            Berikut ini adalah surat-surat yang telah terbit dan diarsipkan. 
+            Berikut ini adalah surat-surat yang telah terbit dan diarsipkan.
             Klik <b>"Lihat"</b> pada kolom aksi untuk menampilkan surat.
         </p>
 

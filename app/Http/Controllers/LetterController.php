@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Letter;
 use App\Http\Requests\StoreLetterRequest;
 use App\Http\Requests\UpdateLetterRequest;
+use App\Models\LetterCategory;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Storage;
+use Str;
 
 class LetterController extends Controller
 {
@@ -24,7 +26,7 @@ class LetterController extends Controller
                 ->orderByDesc('created_at')
                 ->take(20)
                 ->get(),
-            'filters' => $request->only(['search'])
+            'filters' => $request->only(['search']),
         ]);
     }
 
@@ -33,7 +35,9 @@ class LetterController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Letter/Create', [
+            'letter_categories' => LetterCategory::all()
+        ]);
     }
 
     /**
@@ -41,7 +45,22 @@ class LetterController extends Controller
      */
     public function store(StoreLetterRequest $request)
     {
-        //
+        try {
+            $filename = Str::uuid() . '.' . $request->file->getClientOriginalExtension();
+    
+            $path = $request->file->storeAs('letters', $filename);
+    
+            Letter::create([
+                'title' => $request->title,
+                'letter_number' => $request->letter_number,
+                'letter_category_id' => $request->letter_category_id,
+                'file_path' => $path
+            ]);
+            return redirect()->route('letters.index')->with('success', 'Surat berhasil diarsipkan.');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Surat gagal diarsipkan.');
+        }
+
     }
 
     /**

@@ -11,7 +11,7 @@ class StoreLetterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreLetterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required',
+            'letter_number' => 'required',
+            'file' => 'required|file|mimes:pdf',
+            'letter_category_id' => 'required|exists:letter_categories,id',
         ];
     }
 }

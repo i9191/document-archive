@@ -63,11 +63,12 @@ const { letters } = toRefs(props);
                             class="bg-red-500 text-white px-2 py-1 rounded">
                         Hapus
                         </Link>
-                        <!-- <a :href="route('letters.download', letter.id)" target="_blank"
+                        <a :href="route('letters.download', letter.id)" target="_blank"
                             class="bg-yellow-500 text-black px-2 py-1 rounded">
                             Unduh
-                        </a> -->
-                        <Link :href="route('letters.show', letter.id)" class="bg-blue-500 text-white px-2 py-1 rounded">
+                        </a>
+                        <Link :href="route('letters.show', letter.id)"
+                            class="bg-blue-500 text-white px-2 py-1 rounded">
                         Lihat
                         </Link>
                     </td>

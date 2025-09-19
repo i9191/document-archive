@@ -7,6 +7,7 @@ use App\Http\Requests\StoreLetterRequest;
 use App\Http\Requests\UpdateLetterRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Storage;
 
 class LetterController extends Controller
 {
@@ -49,6 +50,11 @@ class LetterController extends Controller
     public function show(Letter $letter)
     {
         //
+    }
+
+    public function download(Letter $letter)
+    {
+        return response()->file(Storage::disk('local')->path($letter->file_path));
     }
 
     /**

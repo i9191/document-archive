@@ -24,7 +24,9 @@ class LetterCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('LetterCategory/Create',[
+            'last_id' => LetterCategory::all()->last()->id
+        ]);
     }
 
     /**
@@ -32,7 +34,11 @@ class LetterCategoryController extends Controller
      */
     public function store(StoreLetterCategoryRequest $request)
     {
-        //
+        LetterCategory::create([
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+        return redirect()->route('letter_categories.index')->with('success', 'Kategori surat berhasil disimpan.');
     }
 
     /**
@@ -48,7 +54,9 @@ class LetterCategoryController extends Controller
      */
     public function edit(LetterCategory $letterCategory)
     {
-        //
+        return Inertia::render('LetterCategory/Create', [
+            'letter_category' => $letterCategory
+        ]);
     }
 
     /**

@@ -68,7 +68,9 @@ class LetterController extends Controller
      */
     public function show(Letter $letter)
     {
-        //
+        return Inertia::render('Letter/Show', [
+            'letter' => $letter->load('letterCategory')
+        ]);
     }
 
     public function download(Letter $letter)

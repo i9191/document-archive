@@ -17,12 +17,11 @@ import { Link } from "@inertiajs/vue3";
             <span>🏷️</span>
             <span>Kategori Surat</span>
             </Link>
-
-            <!-- <Link :href="route('about')" class="flex items-center space-x-2 px-3 py-2 rounded hover:bg-gray-200"
+            <Link :href="route('about')" class="flex items-center space-x-2 px-3 py-2 rounded hover:bg-gray-200"
                 :class="{ 'bg-gray-300 font-semibold': $page.url.startsWith('/about') }">
             <span>ℹ️</span>
             <span>About</span>
-            </Link> -->
+            </Link>
         </nav>
     </aside>
 </template>

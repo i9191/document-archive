@@ -64,7 +64,11 @@ class LetterCategoryController extends Controller
      */
     public function update(UpdateLetterCategoryRequest $request, LetterCategory $letterCategory)
     {
-        //
+        $letterCategory->update([
+            'name' => $request->name ?? $letterCategory->name,
+            'description' => $request->description ?? $letterCategory->description
+        ]);
+        return redirect()->route('letter_categories.index')->with('success', 'Kategori surat berhasil diubah.');
     }
 
     /**

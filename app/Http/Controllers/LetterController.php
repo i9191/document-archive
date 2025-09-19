@@ -97,6 +97,11 @@ class LetterController extends Controller
      */
     public function destroy(Letter $letter)
     {
-        //
+        if (Storage::disk('local')->exists($letter->file_path)) {
+            Storage::disk('local')->delete($letter->file_path);
+        }
+        $letter->delete();
+
+        return redirect()->route('letters.index')->with('success', 'Surat berhasil dihapus.');
     }
 }

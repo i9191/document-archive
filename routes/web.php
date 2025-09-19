@@ -6,3 +6,4 @@ use Inertia\Inertia;
 Route::redirect('/', '/letters');
 Route::resource('letters', \App\Http\Controllers\LetterController::class);
 Route::get('letters/download/{letter}', [\App\Http\Controllers\LetterController::class, 'download'])->name('letters.download');
+Route::resource('letter_categories', \App\Http\Controllers\LetterCategoryController::class);
